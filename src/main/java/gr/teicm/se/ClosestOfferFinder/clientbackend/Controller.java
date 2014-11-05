@@ -10,7 +10,15 @@ package gr.teicm.se.ClosestOfferFinder.clientbackend;
  * @author user
  */
 public class Controller {
+
+    public Controller() {
+        System.out.println("Intializing Controller Constructor");
+    }
+    
+    
+    
     public static void main(String[] args) {
+        System.out.println("Intializing Controller");
         System.out.println("sss");
     }
     
