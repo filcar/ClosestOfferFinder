@@ -12,5 +12,6 @@ import java.util.List;
  * @author Giannis
  */
 public interface IDao {
-    List<Object> getFeed();
+    IRequest getClientData();
+    
 }

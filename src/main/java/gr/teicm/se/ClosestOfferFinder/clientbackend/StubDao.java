@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class StubDao implements IDao {
     
-    private List<Object> feed = new ArrayList<>();
+    private List<IRequest> feed = new ArrayList<>();
     private int id;
     private String storeName, address, prodName, category, disc;
     private double latitude, longitude, discPrice;
@@ -42,7 +42,7 @@ public class StubDao implements IDao {
     }
     
     @Override
-    public List<Object> getFeed(){
+    public IRequest getClientData(){
         return feed;
     }
 
