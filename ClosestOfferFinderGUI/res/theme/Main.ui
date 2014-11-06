@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<component type="Form" name="Main" cloudDestinationProperty="Main" title="OfferFinder" >
+  <component type="Label" name="Label" cloudDestinationProperty="Label" text="X Axis:" >
+  </component>
+  <component type="TextField" name="TextField" cloudBoundProperty="text" cloudDestinationProperty="TextField" text="" >
+  </component>
+  <component type="Label" name="Label1" cloudDestinationProperty="Label1" text="Y Axis:" >
+  </component>
+  <component type="TextField" name="TextField1" cloudBoundProperty="text" cloudDestinationProperty="TextField1" text="" >
+  </component>
+  <component type="Label" name="Label2" cloudDestinationProperty="Label2" text="Radius:" >
+  </component>
+  <component type="ComboBox" name="ComboBox" cloudDestinationProperty="ComboBox" >
+    <stringItem value="500" />
+    <stringItem value="1000" />
+    <stringItem value="1500" />
+    <stringItem value="2000" />
+    <stringItem value="2500" />
+    <stringItem value="3000" />
+  </component>
+  <component type="SpanButton" name="SpanButton" cloudDestinationProperty="SpanButton" >
+    <custom name="text" type="java.lang.String" value="Find Offers" />
+  </component>
+</component>
