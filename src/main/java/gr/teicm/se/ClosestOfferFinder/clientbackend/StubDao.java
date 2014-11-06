@@ -5,7 +5,7 @@
  */
 package gr.teicm.se.ClosestOfferFinder.clientbackend;
 
-import gr.teicm.se.ClosestOfferFinder.clientbackend.interfaces.IDao;
+import gr.teicm.se.ClosestOfferFinder.clientbackend.interfaces.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,13 +25,13 @@ public class StubDao implements IDao {
             double discPrice){
         this.feed.add(id);
         this.feed.add(storeName);
-        this.feed.add(address);
+     //   this.feed.add(address);
         this.feed.add(latitude);
         this.feed.add(longitude);
         this.feed.add(prodName);
-        this.feed.add(category);
-        this.feed.add(disc);
-        this.feed.add(discPrice);
+    //    this.feed.add(category);
+    //    this.feed.add(disc);
+    //    this.feed.add(discPrice);
     }
     
     @Override
