@@ -42,7 +42,7 @@ public class StubDao implements IDao {
     }
     
     @Override
-    public IRequest getClientData(){
+    public IRequest getRequest(){
         return feed;
     }
 

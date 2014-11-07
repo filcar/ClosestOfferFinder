@@ -5,13 +5,11 @@
  */
 package gr.teicm.se.ClosestOfferFinder.clientbackend.interfaces;
 
-import java.util.List;
-
 /**
  *
- * @author Giannis
+ * @author user
  */
-public interface IDao {
-    IRequest getRequest();
-    IOffer setOffer(IOffer Offer);
+public interface IOffer extends IRequest{
+    void setOfferName(String name);
+    void setOfferDescription(String text);
 }

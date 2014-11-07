@@ -18,11 +18,11 @@ public class Controller  {
     }
     
     public void getOffer(int id, String storeName, double latitude, double longtitude, String ProductName) {
-//        id = (int) (dao.getClientData()).get(0);
-//        storeName = (String) (dao.getClientData()).get(1);
-//        latitude = (double) (dao.getClientData()).get(2);
-//        longtitude = (double) (dao.getClientData()).get(3);
-//        ProductName = (String) (dao.getClientData()).get(4);
+//        id = (int) (dao.getRequest()).get(0);
+//        storeName = (String) (dao.getRequest()).get(1);
+//        latitude = (double) (dao.getRequest()).get(2);
+//        longtitude = (double) (dao.getRequest()).get(3);
+//        ProductName = (String) (dao.getRequest()).get(4);
     }
     public void start() {
         int id=0;
