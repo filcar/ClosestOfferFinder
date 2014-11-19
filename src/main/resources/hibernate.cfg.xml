@@ -13,6 +13,8 @@
     <!-- entity classes -->
     <property name="show_sql">true</property>
     <mapping class="gr.myoffers.ws.wsoffer.model.Offer"/>
+    <mapping class="gr.myoffers.ws.wsoffer.model.Company"/>
+    <mapping class="gr.myoffers.ws.wsoffer.model.Category"/>
   </session-factory>
 </hibernate-configuration>
 

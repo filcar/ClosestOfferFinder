@@ -22,26 +22,63 @@ import javax.xml.bind.annotation.XmlType;
 @Entity
 @Table(name="OFFER")
 @XmlRootElement(name = "offer")
-@XmlType(propOrder={"id","descr","price"})
+@XmlType(propOrder={"id","compId","catId","offerName","descr","disc","price"})
 
 public class Offer {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="ID")
-    private int id;
+    @Column(name="id")
+    private int offerId;
+    @Column(name="comp_id")
+    private int compId;
+    @Column(name="cat_id")
+    private int catId;
+    @Column(name="offer_name")
+    private String offerName;
     @Column(name="offer_descr")
     private String descr;
-    @Column(name="PRICE")
+    @Column(name="discount")
+    private double disc;
+    @Column(name="price")
     private double price;
-@XmlElement
+    
+    @XmlElement
     public int getId() {
-        return id;
+        return offerId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int offerId) {
+        this.offerId = offerId;
     }
-@XmlElement
+    
+    @XmlElement    
+    public String getOfferName(){
+        return offerName;
+    }
+    
+    public void setOfferName(String offerName){
+        this.offerName = offerName;
+    }
+    
+    @XmlElement
+    public int getCompId(){
+        return compId;
+    }
+    
+    public void setCompId(int compId){
+        this.compId = compId;
+    }
+    
+    @XmlElement
+    public int getCatId(){
+        return catId;
+    }
+    
+    public void setCatId(int catId){
+        this.catId = catId;
+    }
+    
+    @XmlElement
     public String getDescr() {
         return descr;
     }
@@ -49,7 +86,17 @@ public class Offer {
     public void setDescr(String descr) {
         this.descr = descr;
     }
-@XmlElement
+
+    @XmlElement
+    public double getDisc(){
+        return disc;
+    }
+    
+    public void setDisc(double disc){
+        this.disc = disc;
+    }
+
+    @XmlElement
     public double getPrice() {
         return price;
     }

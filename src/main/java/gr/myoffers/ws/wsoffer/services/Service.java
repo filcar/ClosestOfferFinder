@@ -48,18 +48,18 @@ public class Service {
     @GET
     @Path("/getOfferByIdXML/{id}")
     @Produces(MediaType.APPLICATION_XML)
-    public Offer getOfferByIdXML(@PathParam("id") int id) {
+    public Offer getOfferByIdXML(@PathParam("id") int offerId) {
      //   return offers.get(id);
-        return offerDao.getOfferById(id);
+        return offerDao.getOfferById(offerId);
     }
 //This method return a single offer in json format with the id
 
     @GET
     @Path("/getOfferByIdJSON/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Offer getOfferByIdJSON(@PathParam("id") int id) {
+    public Offer getOfferByIdJSON(@PathParam("id") int offerId) {
      //   return offers.get(id);
-        return offerDao.getOfferById(id);
+        return offerDao.getOfferById(offerId);
     }
 //This method return all offers in XML format
 
@@ -79,4 +79,70 @@ public class Service {
        // return new ArrayList<Offer>(offers.values());
         return offerDao.getAllOffers();
     }
+    
+    @GET
+    @Path("/getOffersWithCertainDiscXML/{disc}")
+    @Produces(MediaType.APPLICATION_XML)
+    public List<Offer> getOffersWithCertainDiscXML(@PathParam("disc") double disc){
+        return offerDao.getOffersWithCertainDisc(disc);
+    }
+    
+    @GET
+    @Path("/getOffersWithCertainDiscJSON/{disc}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Offer> getOffersWithCertainDiscJSON(@PathParam("disc") double disc){
+        return offerDao.getOffersWithCertainDisc(disc);
+    }
+    
+    @GET
+    @Path("/getOffersByStoreXML/{compId}")
+    @Produces(MediaType.APPLICATION_XML)
+    public List<Offer> getOffersByStoreXML(@PathParam("compId") int compId){
+        return offerDao.getOffersByStore(compId);
+    }
+    
+    @GET
+    @Path("/getOffersByStoreJSON/{compId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Offer> getOffersByStoreJSON(@PathParam("compId") int compId){
+        return offerDao.getOffersByStore(compId);
+    }
+    
+    /*
+    @GET
+    @Path("/getOffersByStoreXML/{displayName}")
+    @Produces(MediaType.APPLICATION_XML)
+    public List<Offer> getOffersByStoreXML(@PathParam("displayName") String displayName){
+        return offerDao.getOffersByStore(displayName);
+    }*/
+    
+    @GET
+    @Path("/getOffersByCategoryXML/{catId}")
+    @Produces(MediaType.APPLICATION_XML)
+    public List<Offer> getOffersByCategoryXML(@PathParam("catId") int catId){
+        return offerDao.getOffersByCategory(catId);
+    }
+    
+    @GET
+    @Path("/getOffersByCategoryJSON/{catId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Offer> getOffersByCategoryJSON(@PathParam("catId") int catId){
+        return offerDao.getOffersByCategory(catId);
+    }
+    
+    @GET
+    @Path("/getOffersByCityXML/{city}")
+    @Produces(MediaType.APPLICATION_XML)
+    public List<Offer> getOffersByCityXML(@PathParam("city") String city){
+        return offerDao.getOffersByCity(city);
+    }
+    
+    @GET
+    @Path("/getOffersByCityJSON/{city}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Offer> getOffersByCityJSON(@PathParam("city") String city){
+        return offerDao.getOffersByCity(city);
+    }
+    
+
 }
