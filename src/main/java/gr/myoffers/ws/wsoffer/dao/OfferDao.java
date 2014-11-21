@@ -11,11 +11,12 @@ import org.hibernate.SessionFactory;
  *
  * @author fil
  */
-public class OfferDao {
+public class OfferDao implements IOffer {
 
     SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
     //returns the offer with the given Id
+    @Override
     public Offer getOfferById(int offerId) {
         Offer offer = null;
         Session session = null;
@@ -44,6 +45,7 @@ public class OfferDao {
     }
     
     //returns all the offers
+    @Override
      public List<Offer> getAllOffers() {
         List<Offer> offers = null;
         Session session = null;
@@ -71,6 +73,7 @@ public class OfferDao {
 
     }
      //Returns all the offers that have a discount equal or bigger with the one given
+    @Override
     public List<Offer> getOffersWithCertainDisc(double disc){
         List<Offer> offers = null;
         Session session = null;
@@ -96,6 +99,7 @@ public class OfferDao {
     }
     
     //Returns all the offers of a given store
+    @Override
     public List<Offer> getOffersByStore(int compId){
         List<Offer> offers = null;
         Session session = null;
@@ -146,6 +150,7 @@ public class OfferDao {
     }*/
     
     //Returns all the offers of a given category
+    @Override
     public List<Offer> getOffersByCategory(int catId){
         List<Offer> offers = null;
         Session session = null;
@@ -171,6 +176,7 @@ public class OfferDao {
     }
     
     //Returns all the offers that exist in a given city
+    @Override
     public List<Offer> getOffersByCity(String city){
         List<Offer> offers = null;
         Session session = null;
