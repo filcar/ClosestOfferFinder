@@ -234,5 +234,88 @@ public class OfferDaoTest {
         assertEquals(expResult.toString(), result.toString());
     }
 
+    @Test
+    public void testGetOffersByExistedCategory() {
+        System.out.println("testGetOffersByExistedCategory");
+        int catId = 1;
+        OfferDao instance = new OfferDao();
+        List <Offer>expResult = new ArrayList<>();
+        Offer offer1 = new Offer();
+        Offer offer2 = new Offer();
+        Offer offer3 = new Offer();
+        offer1.setOfferName("αλλαντικά");
+        expResult.add(offer1);
+        offer2.setOfferName("λευκά τυριά");
+        expResult.add(offer2);
+        offer3.setOfferName("σοκολάτες");
+        expResult.add(offer3);
+        List<Offer> result = instance.getOffersByCategory(catId);
+        assertEquals(expResult.toString(), result.toString());
+    }
+    
+    @Test
+    public void testGetOffersByNotExistedCategory() {
+        System.out.println("testGetOffersByNotExistedCategory");
+        int catId = 0;
+        OfferDao instance = new OfferDao();
+        List <Offer>expResult = new ArrayList<>();
+        List<Offer> result = instance.getOffersByCategory(catId);
+        assertEquals(expResult.toString(), result.toString());
+    }
+    
+    @Test
+    public void testGetOffersByCategoryWithNoOffers() {
+        System.out.println("testGetOffersByCategoryWithNoOffers");
+        int catId = 4;
+        OfferDao instance = new OfferDao();
+        List <Offer>expResult = new ArrayList<>();
+        List<Offer> result = instance.getOffersByCategory(catId);
+        assertEquals(expResult.toString(), result.toString());
+    }
+
+    @Test
+    public void testGetOffersByExistedCity() {
+        /*System.out.println("testGetOffersByExistedCity");
+        String city = "σέρρες";
+        OfferDao instance = new OfferDao();
+        List <Offer>expResult = new ArrayList<>();
+        Offer offer1 = new Offer();
+        Offer offer2 = new Offer();
+        Offer offer3 = new Offer();
+        Offer offer4 = new Offer();
+        Offer offer5 = new Offer();
+        offer1.setOfferName("αλλαντικά");
+        expResult.add(offer1);
+        offer2.setOfferName("λευκά τυριά");
+        expResult.add(offer2);
+        offer3.setOfferName("σοκολάτες");
+        expResult.add(offer3);
+        offer4.setOfferName("αναψηκτικά");
+        expResult.add(offer4);
+        offer5.setOfferName("απορρυπαντικά");
+        expResult.add(offer5);
+        List<Offer> result = instance.getOffersByCity(city);
+        assertEquals(expResult.toString(), result.toString());*/
+    }
+
+    @Test
+    public void testGetOffersByNotExistedCity() {
+        System.out.println(" testGetOffersByNotExistedCity");
+        String city = "12345";
+        OfferDao instance = new OfferDao();
+        List <Offer>expResult = new ArrayList<>();
+        List<Offer> result = instance.getOffersByCity(city);
+        assertEquals(expResult.toString(), result.toString());
+    }
+    
+    @Test
+    public void testGetOffersByExistedCityWithNoOffers() {
+        System.out.println("testGetOffersByExistedCityWithNoOffers");
+        String city = "αθήνα";
+        OfferDao instance = new OfferDao();
+        List <Offer>expResult = new ArrayList<>();
+        List<Offer> result = instance.getOffersByCity(city);
+        assertEquals(expResult.toString(), result.toString());
+    }
     
 }
