@@ -15,7 +15,7 @@ import java.util.List;
 public interface IOffer {
     public Offer getOfferById(int offerId);
     public List<Offer> getAllOffers();
-    public List<Offer> getOffersWithCertainDisc(double disc);
+    public List<Offer> getOffersByDisc(double disc);
     public List<Offer> getOffersByStore(int compId);
     public List<Offer> getOffersByCategory(int catId);
     public List<Offer> getOffersByCity(String city);

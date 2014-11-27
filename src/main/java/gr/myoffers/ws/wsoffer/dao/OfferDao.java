@@ -53,7 +53,7 @@ public class OfferDao implements IOffer {
         try {
             session = sessionFactory.openSession();
             session.beginTransaction();
-            offers = session.createQuery("from Offer").list();
+            offers = session.createQuery("from Offer offer order by offer.offerId").list();
             session.getTransaction().commit();
 
         } 
@@ -74,14 +74,14 @@ public class OfferDao implements IOffer {
     }
      //Returns all the offers that have a discount equal or bigger with the one given
     @Override
-    public List<Offer> getOffersWithCertainDisc(double disc){
+    public List<Offer> getOffersByDisc(double disc){
         List<Offer> offers = null;
         Session session = null;
         
         try {
             session = sessionFactory.openSession();
             session.beginTransaction();
-            offers = session.createQuery("from Offer offer where offer.disc >= :discount").setParameter("discount", disc).list();
+            offers = session.createQuery("from Offer offer where offer.disc >= :discount order by offer.offerId").setParameter("discount", disc).list();
             session.getTransaction().commit();
         }
         catch (Exception ex) {
@@ -107,7 +107,7 @@ public class OfferDao implements IOffer {
         try {
             session = sessionFactory.openSession();
             session.beginTransaction();
-            offers = session.createQuery("from Offer offer where offer.compId = :comp_id").setParameter("comp_id", compId).list();
+            offers = session.createQuery("from Offer offer where offer.compId = :comp_id order by offer.offerId").setParameter("comp_id", compId).list();
             session.getTransaction().commit();
         }
         catch (Exception ex) {
@@ -124,31 +124,6 @@ public class OfferDao implements IOffer {
         return offers;
     }
     
-    /*
-    public List<Offer> getOffersByStore(String displayName){
-        List<Offer> offers = null;
-        Session session = null;
-        
-        try {
-            session = sessionFactory.openSession();
-            session.beginTransaction();
-            offers = session.createQuery("from Offer offer where offer.compId = (select company.companyId from Company company where company.displayName = :display_name)").setParameter("display_name", displayName).list();
-            session.getTransaction().commit();
-        }
-        catch (Exception ex) {
-            if (session !=null){
-                session.getTransaction().rollback();
-            }            
-        }
-        finally {
-            if (session != null) {
-                session.close();
-            }
-        }
-        
-        return offers;
-    }*/
-    
     //Returns all the offers of a given category
     @Override
     public List<Offer> getOffersByCategory(int catId){
@@ -158,7 +133,7 @@ public class OfferDao implements IOffer {
         try {
             session = sessionFactory.openSession();
             session.beginTransaction();
-            offers = session.createQuery("from Offer offer where offer.catId = :cat_id").setParameter("cat_id", catId).list();
+            offers = session.createQuery("from Offer offer where offer.catId = :cat_id order by offer.offerId").setParameter("cat_id", catId).list();
             session.getTransaction().commit();
         }
         catch (Exception ex) {

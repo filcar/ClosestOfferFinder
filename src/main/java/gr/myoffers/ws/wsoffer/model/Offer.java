@@ -105,4 +105,9 @@ public class Offer {
         this.price = price;
     }
     
+    @Override
+    public String toString(){
+        return offerName;
+    }
+    
 }
