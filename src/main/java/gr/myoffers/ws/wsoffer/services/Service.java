@@ -5,7 +5,9 @@
  */
 package gr.myoffers.ws.wsoffer.services;
 
+import gr.myoffers.ws.wsoffer.dao.CompanyDao;
 import gr.myoffers.ws.wsoffer.dao.OfferDao;
+import gr.myoffers.ws.wsoffer.model.Company;
 //import gr.myoffers.ws.wsoffer.dao.IOfferDao;
 import gr.myoffers.ws.wsoffer.model.Offer;
 //import java.ua til.ArrayList;
@@ -26,6 +28,7 @@ import javax.ws.rs.core.MediaType;
 public class Service {
 
     private OfferDao offerDao= new OfferDao();
+    private CompanyDao companyDao=new CompanyDao();
 
     @GET
     @Path("/getOfferByIdJSON/{id}")
@@ -87,4 +90,14 @@ public class Service {
         String ver_WS="ver 0.2";
         return ver_WS;
     }
+    
+               //This method company by ID in JSON format
+    @GET
+    @Path("/getCompanyByIdJSON/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Company getCompanyByIdJSON(@PathParam("id") int companyId) {
+        return companyDao.getCompanyById(companyId);
+    } 
+    
+    
 }
