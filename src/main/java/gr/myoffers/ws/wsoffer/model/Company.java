@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlType;
 @Entity
 @Table(name="COMPANY")
 @XmlRootElement(name = "company")
-@XmlType(propOrder={"id","compName","displayName","address","city"})
+@XmlType(propOrder={"companyId","compName","displayName","address","city"})
 
 public class Company {
     @Id
@@ -40,11 +40,11 @@ public class Company {
     private String city;
     
     @XmlElement
-    public int getCompId() {
+    public int getCompanyId() {
         return companyId;
     }
 
-    public void setCompId(int companyId) {
+    public void setCompanyId(int companyId) {
         this.companyId = companyId;
     }
     
