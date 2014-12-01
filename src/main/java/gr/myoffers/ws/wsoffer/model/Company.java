@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlType;
 @Entity
 @Table(name="COMPANY")
 @XmlRootElement(name = "company")
-@XmlType(propOrder={"companyId","compName","displayName","address","city"})
+@XmlType(propOrder={"companyId","compName","displayName","address","city","latitude","longitude"})
 
 public class Company {
     @Id
@@ -38,6 +38,10 @@ public class Company {
     private String address;
     @Column(name="city")
     private String city;
+    @Column (name="latitude")
+    private double latitude;
+    @Column (name="longitude")
+    private double longitude;    
     
     @XmlElement
     public int getCompanyId() {
@@ -82,6 +86,22 @@ public class Company {
     
     public void setCity(String city){
         this.city = city;
+    }
+    @XmlElement
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+    @XmlElement
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
     
 }

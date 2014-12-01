@@ -98,6 +98,20 @@ public class Service {
     public Company getCompanyByIdJSON(@PathParam("id") int companyId) {
         return companyDao.getCompanyById(companyId);
     } 
+ @GET
+    @Path("/getAllCompaniesJSON")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Company> getAllCompaniesJSON() {
+       // return new ArrayList<Offer>(offers.values());
+        return companyDao.getAllCompanies();
+    }   
     
+     @GET
+    @Path("/getCompaniesByRadiusJSON")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Company> getCompaniesByRadiusJSON() {
+       // return new ArrayList<Offer>(offers.values());
+        return companyDao.getCompaniesByRadius(40.4145, 42.2323, 1);
+    }   
     
 }
