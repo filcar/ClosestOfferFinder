@@ -83,14 +83,16 @@ public class CompanyDao {
         List<Company> companies = null;
         Session session = null;
         try {
+            double dist =r/111; 
             session = sessionFactory.openSession();
             session.beginTransaction();
-            String hgl="from Company c where (pow((c.latitude-:lat),2) +  pow((c.longitude-42.2225),2))<pow((1/111),2)";
-            Query query = session.createQuery(hgl);
-            query.setParameter("lat", lat);
-        //   query.setParameter("lon", lon);
-   //         query.setParameter("r", r);
-            companies = query.list();
+            String hgl="from Company c where (pow((c.latitude-:lat),2) +  pow((c.longitude-:lon),2))<pow((:r),2)";
+            companies= session.createQuery(hgl)
+                    .setParameter("lon", lon)
+                    .setParameter("lat", lat)
+                    .setDouble("r", r)
+                    .list();
+            //         
             session.getTransaction().commit();
        
         } catch (Exception ex) {
