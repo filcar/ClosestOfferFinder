@@ -106,12 +106,14 @@ public class Service {
         return companyDao.getAllCompanies();
     }   
     
-     @GET
-    @Path("/getCompaniesByRadiusJSON")
+    @GET
+    @Path("/getCompaniesByRadiusJSON/{lat},{lon},{r}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Company> getCompaniesByRadiusJSON() {
+    public List<Company> getCompaniesByRadiusJSON
+        (@PathParam("lat") double lat,@PathParam("lon")double lon,@PathParam("r")double r) {
        // return new ArrayList<Offer>(offers.values());
-        return companyDao.getCompaniesByRadius(40.4145, 42.2323, 1);
+        return companyDao.getCompaniesByRadius(lat,lon,r);
+       // 40.4145, 42.2225, 3.00
     }   
     
 }
