@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package gr.myoffers.ws.wsoffer.services;
 
 import gr.myoffers.ws.wsoffer.dao.CompanyDao;
@@ -91,29 +87,28 @@ public class Service {
         return ver_WS;
     }
     
-               //This method company by ID in JSON format
+          //This method returns company by ID in JSON format
     @GET
     @Path("/getCompanyByIdJSON/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Company getCompanyByIdJSON(@PathParam("id") int companyId) {
         return companyDao.getCompanyById(companyId);
     } 
- @GET
+      //This method returns all companies in JSON format
+    @GET
     @Path("/getAllCompaniesJSON")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Company> getAllCompaniesJSON() {
-       // return new ArrayList<Offer>(offers.values());
-        return companyDao.getAllCompanies();
+    return companyDao.getAllCompanies();
     }   
-    
+      //This method returns all companies closer to radius (r) in JSON format  
+     //with parameter user latitude and longitude (GPS)
     @GET
     @Path("/getCompaniesByRadiusJSON/{lat},{lon},{r}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Company> getCompaniesByRadiusJSON
         (@PathParam("lat") double lat,@PathParam("lon")double lon,@PathParam("r")double r) {
-       // return new ArrayList<Offer>(offers.values());
         return companyDao.getCompaniesByRadius(lat,lon,r);
-       // 40.4145, 42.2225, 3.00
     }   
     
 }

@@ -8,7 +8,6 @@ package gr.myoffers.ws.wsoffer.dao;
 import gr.myoffers.ws.wsoffer.model.Company;
 import gr.myoffers.ws.wsoffer.util.HibernateUtil;
 import java.util.List;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -16,11 +15,11 @@ import org.hibernate.SessionFactory;
  *
  * @author fil
  */
-public class CompanyDao {
+public class CompanyDao implements ICompanyDao{
     
        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
        
-  // @Override
+   @Override
     public Company getCompanyById(int companyId) {
         Company company = null;
         Session session = null;
@@ -47,7 +46,7 @@ public class CompanyDao {
     }
     
     //returns all Companies
-   // @Override
+    @Override
      public List<Company> getAllCompanies() {
         List<Company> companies = null;
         Session session = null;
@@ -76,9 +75,8 @@ public class CompanyDao {
 
     }
      
-   //select *  from company where (pow((`latitude`-38.7212),2) +  pow((`longitude`-51.8912),2))<(1/111)
-         //returns all Companies
-   // @Override
+
+    @Override
      public List<Company> getCompaniesByRadius( double lat,  double lon, double r) {
         List<Company> companies = null;
         Session session = null;
