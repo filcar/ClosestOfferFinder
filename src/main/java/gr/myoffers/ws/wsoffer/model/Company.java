@@ -104,6 +104,11 @@ public class Company {
         this.longitude = longitude;
     }
     
+    @Override
+    public String toString(){
+        return compName;
+    }
+    
 }
 
 

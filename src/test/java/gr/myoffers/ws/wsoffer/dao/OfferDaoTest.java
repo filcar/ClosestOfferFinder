@@ -320,4 +320,16 @@ public class OfferDaoTest {
         assertEquals(expResult.toString(), result.toString());
     }
     
+    @Test
+    public void testGetMaxOffers() {
+        System.out.println("getMaxOffers()");
+        OfferDao instance = new OfferDao();
+        List <Offer>expResult = new ArrayList<>();
+        Offer offer1 = new Offer();
+        offer1.setOfferName("απορρυπαντικά");
+        expResult.add(offer1);
+        List<Offer> result = instance.getMaxOffers();
+        assertEquals(expResult.toString(), result.toString());
+    }
+    
 }
