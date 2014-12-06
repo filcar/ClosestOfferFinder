@@ -10,7 +10,7 @@ import org.hibernate.SessionFactory;
  *
  * @author fil
  */
-public class OfferDao implements IOffer {
+public class OfferDao implements IOfferDao {
 
     SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
@@ -93,56 +93,56 @@ public class OfferDao implements IOffer {
     }
     
     //Returns all the offers of a given store
-    @Override
-    public List<Offer> getOffersByStore(int compId){
-        List<Offer> offers = null;
-        Session session = null;
-        
-        try {
-            session = sessionFactory.openSession();
-            session.beginTransaction();
-            offers = session.createQuery("from Offer offer where offer.compId = :comp_id order by offer.offerId").setParameter("comp_id", compId).list();
-            session.getTransaction().commit();
-        }
-        catch (Exception ex) {
-            if (session !=null){
-                session.getTransaction().rollback();
-            }            
-        }
-        finally {
-            if (session != null) {
-                session.close();
-            }
-        }
-        
-        return offers;
-    }
-    
-    //Returns all the offers of a given category
-    @Override
-    public List<Offer> getOffersByCategory(int catId){
-        List<Offer> offers = null;
-        Session session = null;
-        
-        try {
-            session = sessionFactory.openSession();
-            session.beginTransaction();
-            offers = session.createQuery("from Offer offer where offer.catId = :cat_id order by offer.offerId").setParameter("cat_id", catId).list();
-            session.getTransaction().commit();
-        }
-        catch (Exception ex) {
-            if (session !=null){
-                session.getTransaction().rollback();
-            }            
-        }
-        finally {
-            if (session != null) {
-                session.close();
-            }
-        }
-        
-        return offers;
-    }
+//    @Override
+//    public List<Offer> getOffersByStore(int compId){
+//        List<Offer> offers = null;
+//        Session session = null;
+//        
+//        try {
+//            session = sessionFactory.openSession();
+//            session.beginTransaction();
+//            offers = session.createQuery("from Offer offer where offer.compId = :comp_id order by offer.offerId").setParameter("comp_id", compId).list();
+//            session.getTransaction().commit();
+//        }
+//        catch (Exception ex) {
+//            if (session !=null){
+//                session.getTransaction().rollback();
+//            }            
+//        }
+//        finally {
+//            if (session != null) {
+//                session.close();
+//            }
+//        }
+//        
+//        return offers;
+//    }
+//    
+//    //Returns all the offers of a given category
+//    @Override
+//    public List<Offer> getOffersByCategory(int catId){
+//        List<Offer> offers = null;
+//        Session session = null;
+//        
+//        try {
+//            session = sessionFactory.openSession();
+//            session.beginTransaction();
+//            offers = session.createQuery("from Offer offer where offer.catId = :cat_id order by offer.offerId").setParameter("cat_id", catId).list();
+//            session.getTransaction().commit();
+//        }
+//        catch (Exception ex) {
+//            if (session !=null){
+//                session.getTransaction().rollback();
+//            }            
+//        }
+//        finally {
+//            if (session != null) {
+//                session.close();
+//            }
+//        }
+//        
+//        return offers;
+//    }
     
     //Returns all the offers that exist in a given city
     @Override
@@ -153,7 +153,7 @@ public class OfferDao implements IOffer {
         try {
             session = sessionFactory.openSession();
             session.beginTransaction();
-            offers = session.createQuery("from Offer offer where offer.compId in  (select company.companyId from Company company where company.city = :city)").setParameter("city", city).list();
+            offers = session.createQuery("from Offer offer where offer.storeId in  (select store.storeId from Store store where store.city = :city)").setParameter("city", city).list();
             session.getTransaction().commit();
         }
         catch (Exception ex) {

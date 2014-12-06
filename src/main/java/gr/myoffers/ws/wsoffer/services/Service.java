@@ -1,10 +1,9 @@
 
 package gr.myoffers.ws.wsoffer.services;
 
-import gr.myoffers.ws.wsoffer.dao.CompanyDao;
 import gr.myoffers.ws.wsoffer.dao.OfferDao;
-import gr.myoffers.ws.wsoffer.model.Company;
-//import gr.myoffers.ws.wsoffer.dao.IOfferDao;
+import gr.myoffers.ws.wsoffer.dao.StoreDao;
+import gr.myoffers.ws.wsoffer.model.Store;
 import gr.myoffers.ws.wsoffer.model.Offer;
 //import java.ua til.ArrayList;
 //import java.util.HashMap;
@@ -23,8 +22,8 @@ import javax.ws.rs.core.MediaType;
 @Path("service")
 public class Service {
 
-    private OfferDao offerDao= new OfferDao();
-    private CompanyDao companyDao=new CompanyDao();
+    private OfferDao offerDao=new OfferDao();
+    private StoreDao storeDao=new StoreDao();
 
     @GET
     @Path("/getOfferByIdJSON/{id}")
@@ -47,19 +46,19 @@ public class Service {
         return offerDao.getOffersByDisc(disc);
     }
     
-    @GET
-    @Path("/getOffersByStoreJSON/{compId}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<Offer> getOffersByStoreJSON(@PathParam("compId") int compId){
-        return offerDao.getOffersByStore(compId);
-    }
-    
-    @GET
-    @Path("/getOffersByCategoryJSON/{catId}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<Offer> getOffersByCategoryJSON(@PathParam("catId") int catId){
-        return offerDao.getOffersByCategory(catId);
-    }
+//    @GET
+//    @Path("/getOffersByStoreJSON/{compId}")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public List<Offer> getOffersByStoreJSON(@PathParam("compId") int compId){
+//        return offerDao.getOffersByStore(compId);
+//    }
+//    
+//    @GET
+//    @Path("/getOffersByCategoryJSON/{catId}")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public List<Offer> getOffersByCategoryJSON(@PathParam("catId") int catId){
+//        return offerDao.getOffersByCategory(catId);
+//    }
       
     @GET
     @Path("/getOffersByCityJSON/{city}")
@@ -89,26 +88,28 @@ public class Service {
     
           //This method returns company by ID in JSON format
     @GET
-    @Path("/getCompanyByIdJSON/{id}")
+    @Path("/getStoreByIdJSON/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Company getCompanyByIdJSON(@PathParam("id") int companyId) {
-        return companyDao.getCompanyById(companyId);
+    public Store getStoreByIdJSON(@PathParam("id") int storeId) {
+        return  storeDao.getStoreById(storeId);
     } 
       //This method returns all companies in JSON format
     @GET
-    @Path("/getAllCompaniesJSON")
+    @Path("/getAllStoresJSON")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Company> getAllCompaniesJSON() {
-    return companyDao.getAllCompanies();
+    public List<Store> getAllStoresJSON() {
+    return storeDao.getAllStores();
     }   
       //This method returns all companies closer to radius (r) in JSON format  
      //with parameter user latitude and longitude (GPS)
     @GET
-    @Path("/getCompaniesByRadiusJSON/{lat},{lon},{r}")
+    @Path("/getStoresByRadiusJSON/{lat},{lon},{r}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Company> getCompaniesByRadiusJSON
+    public List<Store> getStoresByRadiusJSON
         (@PathParam("lat") double lat,@PathParam("lon")double lon,@PathParam("r")double r) {
-        return companyDao.getCompaniesByRadius(lat,lon,r);
+            r=r/111;
+        return storeDao.getStoresByRadius(lat,lon,r);
     }   
+
     
 }

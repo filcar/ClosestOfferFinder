@@ -21,19 +21,19 @@ import javax.xml.bind.annotation.XmlType;
  */
 
 @Entity
-@Table(name="COMPANY")
-@XmlRootElement(name = "company")
-@XmlType(propOrder={"companyId","compName","displayName","address","city","latitude","longitude"})
+@Table(name="STORE")
+@XmlRootElement(name = "STORE")
+@XmlType(propOrder={"storeId","storeName","director","address","city","latitude","longitude"})
 
-public class Company {
+public class Store {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id")
-    private int companyId;
-    @Column(name="comp_name")
-    private String compName;
-    @Column(name="display_name")
-    private String displayName;
+    private int storeId;
+    @Column(name="store_name")
+    private String storeName;
+    @Column(name="director")
+    private String director;
     @Column(name="address")
     private String address;
     @Column(name="city")
@@ -44,36 +44,37 @@ public class Company {
     private Double longitude;    
     
     @XmlElement
-    public int getCompanyId() {
-        return companyId;
+    public int getStoreId() {
+        return storeId;
     }
 
-    public void setCompanyId(int companyId) {
-        this.companyId = companyId;
+    public void setStoreId(int storeId) {
+        this.storeId = storeId;
     }
     
     @XmlElement
-    public String getCompName(){
-        return compName;
+    public String getStoreName(){
+        return storeName;
     }
     
-    public void setCompName(String compName){
-        this.compName = compName;
+    public void setStoreName(String storeName){
+        this.storeName = storeName;
     }
     
     @XmlElement
-    public String getDisplayName(){
-        return displayName;
+    public String getDirector() {
+        return director;
     }
-    
-    public void setDisplayName(String displayName){
-        this.displayName = displayName;
+
+    public void setDirector(String director) {
+        this.director = director;
     }
     
     @XmlElement
     public String getAddress(){
         return address;
     }
+
     
     public void setAddress(String address){
         this.address = address;
@@ -106,7 +107,7 @@ public class Company {
     
     @Override
     public String toString(){
-        return compName;
+        return storeName;
     }
     
 }

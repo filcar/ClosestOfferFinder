@@ -5,16 +5,16 @@
  */
 package gr.myoffers.ws.wsoffer.dao;
 
-import gr.myoffers.ws.wsoffer.model.Company;
+import gr.myoffers.ws.wsoffer.model.Store;
 import java.util.List;
 
 /**
  *
  * @author fil
  */
-public interface ICompanyDao {
+public interface IStoreDao {
     
-    public Company getCompanyById(int companyId);
-    public List<Company> getAllCompanies();        
-    public List<Company> getCompaniesByRadius( double lat,  double lon, double r);
+    public Store getStoreById(int companyId);
+    public List<Store> getAllStores();        
+    public List<Store> getStoresByRadius( double lat,  double lon, double r);
 }

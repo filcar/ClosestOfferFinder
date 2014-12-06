@@ -5,7 +5,7 @@
  */
 package gr.myoffers.ws.wsoffer.dao;
 
-import gr.myoffers.ws.wsoffer.model.Company;
+import gr.myoffers.ws.wsoffer.model.Store;
 import gr.myoffers.ws.wsoffer.util.HibernateUtil;
 import java.util.List;
 import org.hibernate.Session;
@@ -15,19 +15,19 @@ import org.hibernate.SessionFactory;
  *
  * @author fil
  */
-public class CompanyDao implements ICompanyDao{
+public class StoreDao implements IStoreDao{
     
        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
        
    @Override
-    public Company getCompanyById(int companyId) {
-        Company company = null;
+    public Store getStoreById(int storeId) {
+        Store store = null;
         Session session = null;
 
         try {
             session = sessionFactory.openSession();
             session.beginTransaction();
-            company = (Company)session.createQuery("from  Company c where c.companyId=:id").setParameter("id",companyId).uniqueResult();
+            store = (Store)session.createQuery("from  Store c where c.storeId=:id").setParameter("id",storeId).uniqueResult();
             session.getTransaction().commit();
 
         } catch (Exception ex) {
@@ -41,20 +41,20 @@ public class CompanyDao implements ICompanyDao{
             }
         }
 
-        return company;
+        return store;
 
     }
     
     //returns all Companies
     @Override
-     public List<Company> getAllCompanies() {
-        List<Company> companies = null;
+     public List<Store> getAllStores() {
+        List<Store> stores = null;
         Session session = null;
 
         try {
             session = sessionFactory.openSession();
             session.beginTransaction();
-            companies = session.createQuery("from Company c order by c.compName").list();
+            stores = session.createQuery("from Store c order by c.storeName").list();
             session.getTransaction().commit();
 
         } catch (Exception ex) {
@@ -67,7 +67,7 @@ public class CompanyDao implements ICompanyDao{
                 session.close();
             }
         }
-        return companies;
+        return stores;
         
  
         
@@ -77,18 +77,18 @@ public class CompanyDao implements ICompanyDao{
      
 
     @Override
-     public List<Company> getCompaniesByRadius( double lat,  double lon, double r) {
-        List<Company> companies = null;
+     public List<Store> getStoresByRadius( double lat,  double lon, double r) {
+        List<Store> stores = null;
         Session session = null;
         try {
-            double dist =r/111; 
+           // double dist =r/111; 
             session = sessionFactory.openSession();
             session.beginTransaction();
-            String hgl="from Company c where (pow((c.latitude-:lat),2) +  pow((c.longitude-:lon),2))<pow((:r),2)";
-            companies= session.createQuery(hgl)
+            String hgl="from Store c where (pow((c.latitude-:lat),2) +  pow((c.longitude-:lon),2))<pow((:r),2)";
+            stores= session.createQuery(hgl)
                     .setParameter("lon", lon)
                     .setParameter("lat", lat)
-                    .setDouble("r", r)
+                    .setParameter("r", r)
                     .list();
             //         
             session.getTransaction().commit();
@@ -103,7 +103,7 @@ public class CompanyDao implements ICompanyDao{
                 session.close();
             }
         }
-        return companies;
+        return stores;
   
 }
 }

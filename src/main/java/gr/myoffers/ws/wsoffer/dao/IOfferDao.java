@@ -12,12 +12,12 @@ import java.util.List;
  *
  * @author Giannis
  */
-public interface IOffer {
+public interface IOfferDao {
     public Offer getOfferById(int offerId);
     public List<Offer> getAllOffers();
     public List<Offer> getOffersByDisc(double disc);
-    public List<Offer> getOffersByStore(int compId);
-    public List<Offer> getOffersByCategory(int catId);
+ //   public List<Offer> getOffersByStore(int compId);
+//    public List<Offer> getOffersByCategory(int catId);
     public List<Offer> getOffersByCity(String city);
     public List<Offer> getMaxOffers();
 }
