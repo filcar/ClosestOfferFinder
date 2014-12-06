@@ -88,7 +88,7 @@ public class StoreDao implements IStoreDao{
             stores= session.createQuery(hgl)
                     .setParameter("lon", lon)
                     .setParameter("lat", lat)
-                    .setParameter("r", r)
+                    .setParameter("r", r/111)
                     .list();
             //         
             session.getTransaction().commit();

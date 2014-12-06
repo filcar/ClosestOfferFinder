@@ -107,7 +107,7 @@ public class Service {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Store> getStoresByRadiusJSON
         (@PathParam("lat") double lat,@PathParam("lon")double lon,@PathParam("r")double r) {
-            r=r/111;
+            
         return storeDao.getStoresByRadius(lat,lon,r);
     }   
 
