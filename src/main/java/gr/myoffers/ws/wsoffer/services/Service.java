@@ -1,6 +1,8 @@
 
 package gr.myoffers.ws.wsoffer.services;
 
+import gr.myoffers.ws.wsoffer.dao.IOfferDao;
+import gr.myoffers.ws.wsoffer.dao.IStoreDao;
 import gr.myoffers.ws.wsoffer.dao.OfferDao;
 import gr.myoffers.ws.wsoffer.dao.StoreDao;
 import gr.myoffers.ws.wsoffer.model.Store;
@@ -17,11 +19,13 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.xml.bind.annotation.XmlSeeAlso;
 
 /**
  *
  * @author fil
  */
+
 @Path("service")
 public class Service {
 
