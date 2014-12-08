@@ -21,7 +21,7 @@ public class DefaultExceptionHandler implements ExceptionMapper<Exception> {
     public Response toResponse(Exception e) {        
         // For simplicity I am preparing error xml by hand.
         // Ideally we should create an ErrorResponse class to hold the error info.
-        StringBuilder response = new StringBuilder("{response:{");
+        StringBuilder response = new StringBuilder("{\"response\":{");
         response.append("\"status\":\"ERROR\""+",");
         response.append("\"message\":\"" + e.getMessage());
         response.append("\"}}");
