@@ -101,9 +101,16 @@ public class Service {
         store= storeDao.getStoreById(storeId);
         }
          catch (NumberFormatException nfe){
-             throw new NumberFormatException("Character in id");
+             
+         throw new NumberFormatException("Wrong parameter or character in id");
          }
+        catch (Exception ex){
+
+        }
+        if (store==null) 
+            throw new Exception("Store not exist");
         return store;
+        
     } 
       //This method returns all companies in JSON format
     @GET
