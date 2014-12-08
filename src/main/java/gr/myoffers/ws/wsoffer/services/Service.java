@@ -5,6 +5,9 @@ import gr.myoffers.ws.wsoffer.dao.OfferDao;
 import gr.myoffers.ws.wsoffer.dao.StoreDao;
 import gr.myoffers.ws.wsoffer.model.Store;
 import gr.myoffers.ws.wsoffer.model.Offer;
+import gr.myoffers.ws.wsoffer.model.Response;
+import static java.lang.Math.abs;
+import java.util.ArrayList;
 //import java.ua til.ArrayList;
 //import java.util.HashMap;
 import java.util.List;
@@ -29,6 +32,7 @@ public class Service {
     @Path("/getOfferByIdJSON/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Offer getOfferByIdJSON(@PathParam("id") int offerId) {
+             
         return offerDao.getOfferById(offerId);
     }
 
@@ -90,8 +94,16 @@ public class Service {
     @GET
     @Path("/getStoreByIdJSON/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Store getStoreByIdJSON(@PathParam("id") int storeId) {
-        return  storeDao.getStoreById(storeId);
+    public Store getStoreByIdJSON(@PathParam("id") String sstoreId) throws Exception { 
+        Store store=null;
+        try{
+        int storeId=Integer.parseInt(sstoreId);
+        store= storeDao.getStoreById(storeId);
+        }
+         catch (NumberFormatException nfe){
+             throw new NumberFormatException("Character in id");
+         }
+        return store;
     } 
       //This method returns all companies in JSON format
     @GET
@@ -105,11 +117,19 @@ public class Service {
     @GET
     @Path("/getStoresByRadiusJSON/{lat},{lon},{r}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Store> getStoresByRadiusJSON
-        (@PathParam("lat") double lat,@PathParam("lon")double lon,@PathParam("r")double r) {
-            
-        return storeDao.getStoresByRadius(lat,lon,r);
-    }   
-
+    public List<Store> getStoresByRadiusJSON(@PathParam("lat") double lat, @PathParam("lon") double lon, @PathParam("r") double r)
+            throws Exception {
+      //  List<Store> stores = new ArrayList<>();
+        if (abs(lat) > 180 || abs(lon)>180) {
+            throw new Exception("Incorrect coordinate pair");
+        } else if (r <= 0) {
+            throw new Exception("Incorrect radius");
+        }
+        //stores = stores;
+        return storeDao.getStoresByRadius(lat, lon, r);
+    }
+//------------------
     
+   
+//--------
 }
