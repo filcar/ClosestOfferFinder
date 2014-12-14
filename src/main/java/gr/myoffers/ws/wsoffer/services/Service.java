@@ -1,10 +1,12 @@
 
 package gr.myoffers.ws.wsoffer.services;
 
+import gr.myoffers.ws.wsoffer.dao.CompanyDao;
 import gr.myoffers.ws.wsoffer.dao.IOfferDao;
 import gr.myoffers.ws.wsoffer.dao.IStoreDao;
 import gr.myoffers.ws.wsoffer.dao.OfferDao;
 import gr.myoffers.ws.wsoffer.dao.StoreDao;
+import gr.myoffers.ws.wsoffer.model.Company;
 import gr.myoffers.ws.wsoffer.model.Store;
 import gr.myoffers.ws.wsoffer.model.Offer;
 import gr.myoffers.ws.wsoffer.model.Response;
@@ -19,7 +21,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.xml.bind.annotation.XmlSeeAlso;
 
 /**
  *
@@ -31,6 +32,7 @@ public class Service {
 
     private OfferDao offerDao=new OfferDao();
     private StoreDao storeDao=new StoreDao();
+    private CompanyDao companyDao=new CompanyDao();
 
     @GET
     @Path("/getOfferByIdJSON/{id}")
@@ -140,7 +142,28 @@ public class Service {
         return storeDao.getStoresByRadius(lat, lon, r);
     }
 //------------------
-    
+      //This method returns company by ID in JSON format
+    @GET
+    @Path("/getCompanyByIdJSON/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Company getCompanyByIdJSON(@PathParam("id") String sId) throws Exception { 
+        Company company=null;
+        try{
+        int id=Integer.parseInt(sId);
+        company= companyDao.getCompanyById(id);
+        }
+         catch (NumberFormatException nfe){
+             
+         throw new NumberFormatException("Wrong parameter or character in id");
+         }
+        catch (Exception ex){
+
+        }
+        if (company==null) 
+            throw new Exception("Company not exist");
+        return company;
+        
+    }     
    
 //--------
 }

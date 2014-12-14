@@ -5,11 +5,15 @@
  */
 package gr.myoffers.ws.wsoffer.model;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -23,9 +27,9 @@ import javax.xml.bind.annotation.XmlType;
 @Entity
 @Table(name="STORE")
 @XmlRootElement(name = "STORE")
-@XmlType(propOrder={"storeId","storeName","director","address","city","latitude","longitude"})
+//@XmlType(propOrder={"storeId","storeName","director","address","city","latitude","longitude"})
 
-public class Store {
+public class Store implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id")
@@ -104,6 +108,20 @@ public class Store {
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
+    
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "comp_id")
+//    private Company company;
+//
+//    public Company getCompany() {
+//        return company;
+//    }
+//
+//    public void setCompany(Company company) {
+//        this.company = company;
+//    }
+    
+    
     
     @Override
     public String toString(){

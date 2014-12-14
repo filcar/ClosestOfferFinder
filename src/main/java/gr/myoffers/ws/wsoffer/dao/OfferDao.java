@@ -1,6 +1,6 @@
 package gr.myoffers.ws.wsoffer.dao;
 
-import gr.myoffers.ws.wsoffer.model.*;
+import gr.myoffers.ws.wsoffer.model.Offer;
 import gr.myoffers.ws.wsoffer.util.HibernateUtil;
 import java.util.List;
 import org.hibernate.Session;
