@@ -135,7 +135,7 @@ public class Store implements Serializable {
 //        this.company = company;
 //    }
 
-    
+   
     
     @Override
     public String toString(){
