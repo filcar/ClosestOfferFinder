@@ -7,7 +7,7 @@ package gr.myoffers.ws.wsoffer.dao;
 
 import gr.myoffers.ws.wsoffer.model.Company;
 import gr.myoffers.ws.wsoffer.util.HibernateUtil;
-import java.util.List;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -28,6 +28,7 @@ public class CompanyDao {
             session.beginTransaction();
             company = (Company)session.createQuery("from  Company c where c.id=:id").setParameter("id",id).uniqueResult();
             session.getTransaction().commit();
+            Hibernate.initialize(company.getStores());
 
         } catch (Exception ex) {
             if (session != null) {

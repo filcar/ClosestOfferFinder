@@ -8,6 +8,7 @@ package gr.myoffers.ws.wsoffer.dao;
 import gr.myoffers.ws.wsoffer.model.Store;
 import gr.myoffers.ws.wsoffer.util.HibernateUtil;
 import java.util.List;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -92,7 +93,7 @@ public class StoreDao implements IStoreDao{
                     .list();
             //         
             session.getTransaction().commit();
-       
+//             Hibernate.initialize(????);   
         } catch (Exception ex) {
             if (session != null) {
                 session.getTransaction().rollback();

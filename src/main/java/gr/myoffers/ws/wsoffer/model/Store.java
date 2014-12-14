@@ -6,6 +6,8 @@
 package gr.myoffers.ws.wsoffer.model;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,6 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -27,7 +30,7 @@ import javax.xml.bind.annotation.XmlType;
 @Entity
 @Table(name="STORE")
 @XmlRootElement(name = "STORE")
-//@XmlType(propOrder={"storeId","storeName","director","address","city","latitude","longitude"})
+@XmlType(propOrder={"storeId","storeName","director","address","city","latitude","longitude","offers"})
 
 public class Store implements Serializable {
     @Id
@@ -46,7 +49,8 @@ public class Store implements Serializable {
     private Double latitude;
     @Column (name="longitude")
     private Double longitude;    
-    
+
+
     @XmlElement
     public int getStoreId() {
         return storeId;
@@ -108,11 +112,21 @@ public class Store implements Serializable {
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name="store_id")
+    private List<Offer> offers;
     
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "comp_id")
+    public List<Offer> getOffers() {
+        return offers;
+    }
+
+    public void setOffers(List<Offer> offers) {
+        this.offers = offers;
+    }
+ //   @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "comp_id",referencedColumnName="id",nullable=false,unique=true)
 //    private Company company;
-//
+//    
 //    public Company getCompany() {
 //        return company;
 //    }
@@ -120,7 +134,7 @@ public class Store implements Serializable {
 //    public void setCompany(Company company) {
 //        this.company = company;
 //    }
-    
+
     
     
     @Override

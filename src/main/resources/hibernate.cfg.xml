@@ -19,4 +19,3 @@
     <mapping class="gr.myoffers.ws.wsoffer.model.Company"/>
   </session-factory>
 </hibernate-configuration>
-

@@ -146,23 +146,24 @@ public class Service {
     @GET
     @Path("/getCompanyByIdJSON/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Company getCompanyByIdJSON(@PathParam("id") String sId) throws Exception { 
-        Company company=null;
-        try{
-        int id=Integer.parseInt(sId);
-        company= companyDao.getCompanyById(id);
-        }
-         catch (NumberFormatException nfe){
-             
-         throw new NumberFormatException("Wrong parameter or character in id");
-         }
-        catch (Exception ex){
-
-        }
-        if (company==null) 
-            throw new Exception("Company not exist");
-        return company;
-        
+    public Company getCompanyByIdJSON(@PathParam("id") int Id) throws Exception
+    { 
+//        Company company=null;
+//        try{
+//        int id=Integer.parseInt(sId);
+//        company= companyDao.getCompanyById(id);
+//        }
+//         catch (NumberFormatException nfe){
+//             
+//         throw new NumberFormatException("Wrong parameter or character in id");
+//         }
+//        catch (Exception ex){
+//
+//        }
+//        if (company==null) 
+//            throw new Exception("Company not exist");
+//        return company;
+        return companyDao.getCompanyById(Id);
     }     
    
 //--------
