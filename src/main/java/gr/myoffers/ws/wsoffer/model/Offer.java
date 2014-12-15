@@ -5,11 +5,17 @@
  */
 package gr.myoffers.ws.wsoffer.model;
 
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -23,7 +29,7 @@ import javax.xml.bind.annotation.XmlType;
 @Table(name="OFFER")
 @XmlRootElement(name = "offer")
 @XmlType(propOrder={"id",//"compId","catId",
-                    "offerName","descr","disc","price"})
+                    "offerName","descr","disc","price","category"})
 
 public class Offer {
     @Id
@@ -114,6 +120,20 @@ public class Offer {
 //     public void setDiscount(double discount) {
 //        this.discount = discount;
 //    }
+    
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name="cat_id", referencedColumnName="id", nullable=false)
+    private Category category;
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+    
+    
     
     @Override
     public String toString(){

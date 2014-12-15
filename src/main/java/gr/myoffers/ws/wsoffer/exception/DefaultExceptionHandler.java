@@ -5,6 +5,7 @@
  */
 package gr.myoffers.ws.wsoffer.exception;
 
+import java.nio.charset.Charset;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
@@ -21,10 +22,11 @@ public class DefaultExceptionHandler implements ExceptionMapper<Exception> {
     public Response toResponse(Exception e) {        
         // For simplicity I am preparing error xml by hand.
         // Ideally we should create an ErrorResponse class to hold the error info.
-        StringBuilder response = new StringBuilder("{\"response\":{");
+
+        StringBuilder response = new StringBuilder("[{\"response\":{");
         response.append("\"status\":\"ERROR\""+",");
         response.append("\"message\":\"" + e.getMessage());
-        response.append("\"}}");
+        response.append("\"}}]");
         return Response.serverError().entity(response.toString()).type(MediaType.APPLICATION_JSON).build();
     }
 }

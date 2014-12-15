@@ -77,7 +77,6 @@ public class Service {
         return offerDao.getOffersByCity(city);
     }
     
-
     
         //This method return all offers in JSON format
     @GET
@@ -93,10 +92,10 @@ public class Service {
     @Produces(MediaType.APPLICATION_JSON)
     public String getVersionWsJSON() {
         String ver_WS="ver 0.2";
-        return ver_WS;
+        return "[{\"version\":{\"ver_ws\":\""+ver_WS+"\"}]";
     }
     
-          //This method returns company by ID in JSON format
+          //This method returns store by ID in JSON format
     @GET
     @Path("/getStoreByIdJSON/{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -118,14 +117,14 @@ public class Service {
         return store;
         
     } 
-      //This method returns all companies in JSON format
+      //This method returns all stores in JSON format
     @GET
     @Path("/getAllStoresJSON")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Store> getAllStoresJSON() {
     return storeDao.getAllStores();
     }   
-      //This method returns all companies closer to radius (r) in JSON format  
+      //This method returns all stores closer to radius (r) in JSON format  
      //with parameter user latitude and longitude (GPS)
     @GET
     @Path("/getStoresByRadiusJSON/{lat},{lon},{r}")
@@ -146,24 +145,23 @@ public class Service {
     @GET
     @Path("/getCompanyByIdJSON/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Company getCompanyByIdJSON(@PathParam("id") int Id) throws Exception
+    public Company getCompanyByIdJSON(@PathParam("id") String sId) throws Exception
     { 
-//        Company company=null;
-//        try{
-//        int id=Integer.parseInt(sId);
-//        company= companyDao.getCompanyById(id);
-//        }
-//         catch (NumberFormatException nfe){
-//             
-//         throw new NumberFormatException("Wrong parameter or character in id");
-//         }
-//        catch (Exception ex){
-//
-//        }
-//        if (company==null) 
-//            throw new Exception("Company not exist");
-//        return company;
-        return companyDao.getCompanyById(Id);
+        Company company = null;
+        try {
+            int id = Integer.parseInt(sId);
+            company = companyDao.getCompanyById(id);
+        } catch (NumberFormatException nfe) {
+
+            throw new NumberFormatException("Wrong parameter or character in id");
+        } catch (Exception ex) {
+
+        }
+        if (company == null) {
+            throw new Exception("Company not exist");
+        }
+        return company;
+    //    return companyDao.getCompanyById(Id);
     }     
    
 //--------
