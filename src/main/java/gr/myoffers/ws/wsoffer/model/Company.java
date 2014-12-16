@@ -58,8 +58,7 @@ private Company(){}
         this.name = name;
     }
 
-    @OneToMany(//mappedBy = "company", 
-            cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name="comp_id") 
     private List<Store> stores;
  

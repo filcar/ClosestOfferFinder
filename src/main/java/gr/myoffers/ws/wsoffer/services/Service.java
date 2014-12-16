@@ -99,21 +99,17 @@ public class Service {
     @GET
     @Path("/getStoreByIdJSON/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Store getStoreByIdJSON(@PathParam("id") String sstoreId) throws Exception { 
-        Store store=null;
-        try{
-        int storeId=Integer.parseInt(sstoreId);
-        store= storeDao.getStoreById(storeId);
-        }
-         catch (NumberFormatException nfe){
-             
-         throw new NumberFormatException("Wrong parameter or character in id");
-         }
-        catch (Exception ex){
-
-        }
-        if (store==null) 
+    public Store getStoreByIdJSON(@PathParam("id") String sstoreId) throws Exception {
+        Store store = null;
+        try {
+            int storeId = Integer.parseInt(sstoreId);
+            store = storeDao.getStoreById(storeId);
+        } catch (NumberFormatException nfe) {
+            throw new NumberFormatException("Wrong parameter or character in id");
+        } catch (Exception ex) { }
+        if (store == null) {
             throw new Exception("Store not exist");
+        }
         return store;
         
     } 

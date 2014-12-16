@@ -57,7 +57,7 @@ public class StoreDao implements IStoreDao{
             session.beginTransaction();
             stores = session.createQuery("from Store c order by c.storeName").list();
             session.getTransaction().commit();
-
+//            Hibernate.initialize(???);  
         } catch (Exception ex) {
             if (session != null) {
                 session.getTransaction().rollback();
@@ -69,10 +69,6 @@ public class StoreDao implements IStoreDao{
             }
         }
         return stores;
-        
- 
-        
-        
 
     }
      
@@ -93,7 +89,7 @@ public class StoreDao implements IStoreDao{
                     .list();
             //         
             session.getTransaction().commit();
-//             Hibernate.initialize(????);   
+           //  Hibernate.initialize(?????);   
         } catch (Exception ex) {
             if (session != null) {
                 session.getTransaction().rollback();
