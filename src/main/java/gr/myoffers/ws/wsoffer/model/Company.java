@@ -6,9 +6,6 @@
 package gr.myoffers.ws.wsoffer.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedHashSet;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;

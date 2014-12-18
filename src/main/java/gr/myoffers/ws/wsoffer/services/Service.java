@@ -160,5 +160,11 @@ public class Service {
     //    return companyDao.getCompanyById(Id);
     }     
    
+    @GET
+    @Path("/getAllCompaniesJSON")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Company> getAllCompaniesJSON() {
+    return companyDao.getAllCompanies();
+    }   
 //--------
 }
