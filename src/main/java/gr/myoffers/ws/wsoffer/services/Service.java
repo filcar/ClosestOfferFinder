@@ -2,8 +2,6 @@
 package gr.myoffers.ws.wsoffer.services;
 
 import gr.myoffers.ws.wsoffer.dao.CompanyDao;
-import gr.myoffers.ws.wsoffer.dao.IOfferDao;
-import gr.myoffers.ws.wsoffer.dao.IStoreDao;
 import gr.myoffers.ws.wsoffer.dao.OfferDao;
 import gr.myoffers.ws.wsoffer.dao.StoreDao;
 import gr.myoffers.ws.wsoffer.model.Company;
@@ -16,14 +14,13 @@ import java.util.Iterator;
 //import java.ua til.ArrayList;
 //import java.util.HashMap;
 import java.util.List;
+import javax.persistence.Id;
 //import java.util.Map;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import org.hibernate.Hibernate;
-import static org.hibernate.internal.util.collections.CollectionHelper.arrayList;
 
 /**
  *
@@ -130,7 +127,7 @@ public class Service {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Store> getStoresByRadiusJSON(@PathParam("lat") double lat, @PathParam("lon") double lon, @PathParam("r") double r)
             throws Exception {
-        List<Store> stores = new ArrayList<>();
+     //   List<Store> stores = new ArrayList<>();
         
         if (abs(lat) > 180 || abs(lon)>180) {
             throw new Exception("Incorrect coordinate pair");
@@ -141,12 +138,39 @@ public class Service {
         return storeDao.getStoresByRadius(lat, lon, r);
         
     }
+//-------------------
+          //This method returns all stores closer to radius (r) in JSON format  
+     //with parameter user latitude and longitude (GPS)
+    @GET
+    @Path("/getOnlyStoresByRadiusJSON/{lat},{lon},{r}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Response> getOnlyStoresByRadiusJSON(@PathParam("lat") double lat, @PathParam("lon") double lon, @PathParam("r") double r)
+            throws Exception {
+        List<Response> responses = new ArrayList<>();
+      
+        if (abs(lat) > 180 || abs(lon)>180) {
+            throw new Exception("Incorrect coordinate pair");
+        } else if (r <= 0) {
+            throw new Exception("Incorrect radius");
+        }
+        List<Store> stores = storeDao.getStoresByRadius(lat, lon, r);
+                for (Iterator iter = stores.iterator();iter.hasNext();) {
+                Store store = (Store) iter.next();
+        Response response = new Response();//= (Response) iter1;
+                response.setId(store.getStoreId());
+                response.setStatus("Store");
+                response.setMessage(store.getStoreName()+"-"+store.getAddress());
+                responses.add(response);
+                }  
+        return responses;
+        
+    }
 //------------------
       //This method returns company by ID in JSON format
     @GET
-    @Path("/getCompanyByIdJSON/{id}")
+    @Path("/getOnlyCompanyByIdJSON/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getCompanyByIdJSON(@PathParam("id") String sId) throws Exception
+    public Response getOnlyCompanyByIdJSON(@PathParam("id") String sId) throws Exception
     { 
         Response response = new Response();
         Company company = null;
@@ -168,7 +192,31 @@ public class Service {
         return response;
     //    return companyDao.getCompanyById(Id);
     }     
-   
+//-----
+       //This method returns company by ID in JSON format
+    @GET
+    @Path("/getCompanyByIdJSON/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Company getCompanyByIdJSON(@PathParam("id") String sId) throws Exception
+    { 
+        Company company = null;
+        try {
+            int id = Integer.parseInt(sId);
+            company=companyDao.getCompanyById(id);
+        } catch (NumberFormatException nfe) {
+
+            throw new NumberFormatException("Wrong parameter or character in id");
+        } catch (Exception ex) {
+
+        }
+        if (company == null) {
+            throw new Exception("Company not exist");
+        }
+
+        return company;
+    }    
+    
+//------
     @GET
     @Path("/getAllCompaniesOnlyJSON")
     @Produces(MediaType.APPLICATION_JSON)
