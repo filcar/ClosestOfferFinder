@@ -12,6 +12,7 @@ import gr.myoffers.ws.wsoffer.model.Offer;
 import gr.myoffers.ws.wsoffer.model.Response;
 import static java.lang.Math.abs;
 import java.util.ArrayList;
+import java.util.Iterator;
 //import java.ua til.ArrayList;
 //import java.util.HashMap;
 import java.util.List;
@@ -21,6 +22,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import org.hibernate.Hibernate;
+import static org.hibernate.internal.util.collections.CollectionHelper.arrayList;
 
 /**
  *
@@ -127,7 +130,8 @@ public class Service {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Store> getStoresByRadiusJSON(@PathParam("lat") double lat, @PathParam("lon") double lon, @PathParam("r") double r)
             throws Exception {
-      //  List<Store> stores = new ArrayList<>();
+        List<Store> stores = new ArrayList<>();
+        
         if (abs(lat) > 180 || abs(lon)>180) {
             throw new Exception("Incorrect coordinate pair");
         } else if (r <= 0) {
@@ -135,18 +139,22 @@ public class Service {
         }
         //stores = stores;
         return storeDao.getStoresByRadius(lat, lon, r);
+        
     }
 //------------------
       //This method returns company by ID in JSON format
     @GET
     @Path("/getCompanyByIdJSON/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Company getCompanyByIdJSON(@PathParam("id") String sId) throws Exception
+    public Response getCompanyByIdJSON(@PathParam("id") String sId) throws Exception
     { 
+        Response response = new Response();
         Company company = null;
         try {
             int id = Integer.parseInt(sId);
             company = companyDao.getCompanyById(id);
+            response.setStatus(String.valueOf(company.getId()));
+            response.setMessage(company.getName());
         } catch (NumberFormatException nfe) {
 
             throw new NumberFormatException("Wrong parameter or character in id");
@@ -156,15 +164,59 @@ public class Service {
         if (company == null) {
             throw new Exception("Company not exist");
         }
-        return company;
+
+        return response;
     //    return companyDao.getCompanyById(Id);
     }     
    
+    @GET
+    @Path("/getAllCompaniesOnlyJSON")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Response> getAllCompaniesOnlyJSON() {
+        List<Response> responses;
+        responses = new ArrayList<>();
+        List<Company> companies = companyDao.getAllCompanies();
+        for (Iterator iter = companies.iterator();iter.hasNext();) {
+                Company company = (Company) iter.next();
+              //  Iterator  iter1= responses.iterator();
+        Response response = new Response();//= (Response) iter1;
+                response.setId(company.getId());
+                response.setStatus("Company");
+                response.setMessage(company.getName());
+                responses.add(response);
+              
+            }
+        
+    return responses;
+//---------
+}
     @GET
     @Path("/getAllCompaniesJSON")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Company> getAllCompaniesJSON() {
     return companyDao.getAllCompanies();
-    }   
-//--------
+}
+    @GET
+    @Path("/getOffersByRadiusJSON/{lat},{lon},{r}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Offer> getOffersByRadiusJSON(@PathParam("lat") double lat, @PathParam("lon") double lon, @PathParam("r") double r)
+            throws Exception {
+        List<Store> stores = new ArrayList<>();
+        List<Offer> offers = new ArrayList<>();
+
+        if (abs(lat) > 180 || abs(lon)>180) {
+            throw new Exception("Incorrect coordinate pair");
+        } else if (r <= 0) {
+            throw new Exception("Incorrect radius");
+        }
+        //stores = stores;
+        stores=storeDao.getStoresByRadius(lat, lon, r);
+        for (Iterator iter = stores.iterator();iter.hasNext();) {
+                Store store = (Store) iter.next();
+                offers.addAll(store.getOffers());
+        }
+        return offers;
+        
+    }    
+    
 }

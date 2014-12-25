@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import java.util.Date;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  *
@@ -16,42 +17,45 @@ import java.util.Date;
  */
   
    @XmlRootElement
+   @XmlType(propOrder={"id","status","message"})
 public class Response {
-    private long id;
+    private int id;
     private String status;
     private String message;
 
-
-    public long getId() {
-        return (new Date()).getTime();
+    //@XmlAttribute
+    @XmlElement
+    public int getId() {
+      //  return (new Date()).getTime();
+        return id;
     }
 
 
-    @XmlAttribute
-    public void setId(long id) {
+
+    public void setId(int id) {
         this.id = id;
     }
 
-
+    @XmlElement
     public String getStatus() {
         
         return status;
     }
 
 
-    @XmlElement
+
     public void setStatus(String status) {
         this.status = status;
     }
 
-
+    @XmlElement
     public String getMessage() {
        
         return message;
     }
 
 
-    @XmlElement
+
     public void setMessage(String message) {
         this.message = message;
     }

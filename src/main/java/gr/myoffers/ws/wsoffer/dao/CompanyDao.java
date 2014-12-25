@@ -28,7 +28,7 @@ public class CompanyDao implements ICompanyDao {
         try {
             session = sessionFactory.openSession();
             session.beginTransaction();
-            company = (Company)session.createQuery("from  Company c where c.id=:id").setParameter("id",id).uniqueResult();
+            company = (Company)session.createQuery("from Company c where c.id=:id").setParameter("id",id).uniqueResult();
             Hibernate.initialize(company.getStores());
             session.getTransaction().commit();
 
@@ -62,7 +62,8 @@ public class CompanyDao implements ICompanyDao {
                 Company company = (Company) iter.next();
              //   log.debug(company);
                 
-                Hibernate.initialize(company.getStores());
+                Hibernate.initialize(company.getStores().iterator());
+                
             }
  
              session.getTransaction().commit();
