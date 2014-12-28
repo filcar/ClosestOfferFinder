@@ -35,6 +35,19 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(propOrder={"offerId","offerName","descr","disc","price","category","startdate","enddate"})
 
 public class Offer {
+
+//    public Offer(int offerId, String offerName, String descr, double disc, double price, Date enddate, Date startdate, Category category) {
+//        this.offerId = offerId;
+//        this.offerName = offerName;
+//        this.descr = descr;
+//        this.disc = disc;
+//        this.price = price;
+//        this.enddate = enddate;
+//        this.startdate = startdate;
+//        this.category = category;
+//    }
+//    
+    
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id")

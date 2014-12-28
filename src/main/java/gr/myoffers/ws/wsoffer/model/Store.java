@@ -32,6 +32,19 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(propOrder={"storeId","storeName","director","address","city","latitude","longitude","offers"})
 
 public class Store implements Serializable {
+
+//    public Store(int storeId, String storeName, String director, String address, String city, Double latitude, Double longitude, List<Offer> offers) {
+//        this.storeId = storeId;
+//        this.storeName = storeName;
+//        this.director = director;
+//        this.address = address;
+//        this.city = city;
+//        this.latitude = latitude;
+//        this.longitude = longitude;
+//        this.offers = offers;
+//    }
+//    
+    
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id")

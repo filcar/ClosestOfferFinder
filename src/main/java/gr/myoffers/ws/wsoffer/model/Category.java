@@ -26,6 +26,13 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(propOrder={"categoryId","catName"})
 
 public class Category implements Serializable {   
+
+//    public Category(int categoryId, String catName) {
+//        this.categoryId = categoryId;
+//        this.catName = catName;
+//    }
+    
+    
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id")

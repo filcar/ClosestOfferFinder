@@ -31,7 +31,16 @@ import org.hibernate.annotations.LazyCollectionOption;
 @XmlRootElement(name = "Company")
 
 public class Company implements Serializable {
-private Company(){}
+
+//    public Company(int id, String name, List<Store> stores) {
+//        this.id = id;
+//        this.name = name;
+//        this.stores = stores;
+//    }
+
+
+    
+//private Company(){}
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -58,7 +67,7 @@ private Company(){}
     }
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name="comp_id") 
+    @JoinColumn(name="comp_id",nullable=true) 
   //  @LazyCollection(LazyCollectionOption.EXTRA)
     private List<Store> stores;
  
