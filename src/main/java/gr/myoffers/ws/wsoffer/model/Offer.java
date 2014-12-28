@@ -5,6 +5,7 @@
  */
 package gr.myoffers.ws.wsoffer.model;
 
+import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -17,6 +18,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
@@ -28,18 +32,13 @@ import javax.xml.bind.annotation.XmlType;
 @Entity
 @Table(name="OFFER")
 @XmlRootElement(name = "offer")
-@XmlType(propOrder={"id",//"compId","catId",
-                    "offerName","descr","disc","price","category"})
+@XmlType(propOrder={"offerId","offerName","descr","disc","price","category","startdate","enddate"})
 
 public class Offer {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id")
     private int offerId;
-//    @Column(name="comp_id")
-//    private int compId;
-//    @Column(name="cat_id")
-//    private int catId;
     @Column(name="offer_name")
     private String offerName;
     @Column(name="offer_descr")
@@ -48,15 +47,19 @@ public class Offer {
     private double disc;
     @Column(name="price")
     private double price;
-//    @Column (name="DISCOUNT")
-//    private double discount;
+    @Temporal(TemporalType.DATE)
+    @Column (name="end_date")
+    private Date enddate;
+    @Temporal(TemporalType.DATE)
+    @Column (name="start_date")
+    private Date startdate;
     
-    @XmlElement
-    public int getId() {
+  @XmlElement
+    public int getOfferId() {
         return offerId;
     }
 
-    public void setId(int offerId) {
+    public void setOfferId(int offerId) {
         this.offerId = offerId;
     }
     
@@ -64,28 +67,11 @@ public class Offer {
     public String getOfferName(){
         return offerName;
     }
-    
+
     public void setOfferName(String offerName){
         this.offerName = offerName;
     }
     
-//    @XmlElement
-//    public int getCompId(){
-//        return compId;
-//    }
-//    
-//    public void setCompId(int compId){
-//        this.compId = compId;
-//    }
-//    
-//    @XmlElement
-//    public int getCatId(){
-//        return catId;
-//    }
-//    
-//    public void setCatId(int catId){
-//        this.catId = catId;
-//    }
     
     @XmlElement
     public String getDescr() {
@@ -113,16 +99,26 @@ public class Offer {
     public void setPrice(double price) {
         this.price = price;
     }
-// @XmlElement
-//    public double getDiscount() {
-//        return discount;
-//    }
-//     public void setDiscount(double discount) {
-//        this.discount = discount;
-//    }
+    @XmlElement
+    public Date getEnddate() {
+        return enddate;
+    }
+
+    public void setEnddate(Date enddate) {
+        this.enddate = enddate;
+    }
+    @XmlElement
+    public Date getStartdate() {
+        return startdate;
+    }
+
+    public void setStartdate(Date startdate) {
+        this.startdate = startdate;
+    }
+   
     
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name="cat_id", referencedColumnName="id", nullable=false)
+    @JoinColumn(name="cat_id", referencedColumnName="id", nullable=true)
     private Category category;
 
     public Category getCategory() {
