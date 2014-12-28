@@ -84,13 +84,19 @@ public static void setup() {
  //   List<Company> companies = new ArrayList<>();
  //   companies.add(company1);
  //   when(mockedCompanyDao.getAllCompanies()).thenReturn(companies);
-         List<Response> mockResponses;
-        mockResponses = new ArrayList<>();
-      Response mockResponse = new Response();//= (Response) iter1;
-                mockResponse.setId(999);
-                mockResponse.setStatus("Company");
-                mockResponse.setMessage("testcompname");
-                mockResponses.add(mockResponse);
+      List<Response> mockResponses;
+            mockResponses = new ArrayList<>();
+            Response mockResponse1= new Response();
+            mockResponse1.setId(111);
+            mockResponse1.setStatus("Company1");
+            mockResponse1.setMessage("testcompname1");
+            mockResponses.add(mockResponse1);
+            Response mockResponse2= new Response();
+            mockResponse2.setId(222);
+            mockResponse2.setStatus("Company2");
+            mockResponse2.setMessage("testcompname2");
+            mockResponses.add(mockResponse2);
+      
     when(mockedService.getAllCompaniesOnlyJSON()).thenReturn(mockResponses);
             }
 
@@ -101,7 +107,7 @@ public static void setup() {
     @Test
     public void testGetAllCompaniesOnlyJSON()  throws Exception {
     Dispatcher dispatcher = MockDispatcherFactory.createDispatcher();
-    POJOResourceFactory noDefaults = new POJOResourceFactory(Service.class);
+  //  POJOResourceFactory noDefaults = new POJOResourceFactory(Service.class);
     //dispatcher.getRegistry().addResourceFactory(noDefaults);
     dispatcher.getRegistry().addSingletonResource(mockedService);
 
@@ -110,9 +116,28 @@ public static void setup() {
         MockHttpResponse response = new MockHttpResponse();
 
         dispatcher.invoke(request, response);
-        assertEquals(HttpServletResponse.SC_OK, response.getStatus());
-        Assert.assertEquals("[{\"response\":{\"id\":999,\"status\":\"Company\",\"message\":\"testcompname\"}}]", response.getContentAsString());
+        Assert.assertEquals("[{\"response\":{\"id\":111,\"status\":\"Company1\",\"message\":\"testcompname1\"}},"
+                          + "{\"response\":{\"id\":222,\"status\":\"Company2\",\"message\":\"testcompname2\"}}]",response.getContentAsString());
     }
+    }
+     /**
+     * Test of not found ., of class Service.
+     * @throws java.lang.Exception
+     */
+    @Test
+    public void testNotFoundCompanies()  throws Exception {
+    Dispatcher dispatcher = MockDispatcherFactory.createDispatcher();
+ //   POJOResourceFactory noDefaults = new POJOResourceFactory(Service.class);
+    //dispatcher.getRegistry().addResourceFactory(noDefaults);
+    dispatcher.getRegistry().addSingletonResource(mockedService);
+
+    {
+        MockHttpRequest request = MockHttpRequest.get("/service/testNotFoundCompanies");
+        MockHttpResponse response = new MockHttpResponse();
+
+        dispatcher.invoke(request, response);
+         assertEquals(HttpServletResponse.SC_NOT_FOUND,response.getStatus());
+     }
     }
     
 }
