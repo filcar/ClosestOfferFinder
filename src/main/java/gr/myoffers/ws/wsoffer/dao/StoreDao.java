@@ -5,9 +5,12 @@
  */
 package gr.myoffers.ws.wsoffer.dao;
 
+import gr.myoffers.ws.wsoffer.model.Offer;
 import gr.myoffers.ws.wsoffer.model.Store;
 import gr.myoffers.ws.wsoffer.util.HibernateUtil;
+import java.util.Iterator;
 import java.util.List;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -27,7 +30,8 @@ public class StoreDao implements IStoreDao{
         try {
             session = sessionFactory.openSession();
             session.beginTransaction();
-            store = (Store)session.createQuery("from  Store c where c.storeId=:id").setParameter("id",storeId).uniqueResult();
+            store = (Store)session.createQuery("from  Store s where s.storeId=:id").setParameter("id",storeId).uniqueResult();
+            Hibernate.initialize(store.getOffers());
             session.getTransaction().commit();
 
         } catch (Exception ex) {
@@ -55,8 +59,12 @@ public class StoreDao implements IStoreDao{
             session = sessionFactory.openSession();
             session.beginTransaction();
             stores = session.createQuery("from Store c order by c.storeName").list();
+            for (Iterator iter = stores.iterator();iter.hasNext();) {
+                Store store = (Store)iter.next();
+             //   log.debug(store);
+                Hibernate.initialize(store.getOffers());
+            }
             session.getTransaction().commit();
-
         } catch (Exception ex) {
             if (session != null) {
                 session.getTransaction().rollback();
@@ -68,10 +76,6 @@ public class StoreDao implements IStoreDao{
             }
         }
         return stores;
-        
- 
-        
-        
 
     }
      
@@ -90,9 +94,12 @@ public class StoreDao implements IStoreDao{
                     .setParameter("lat", lat)
                     .setParameter("r", r/111)
                     .list();
-            //         
-            session.getTransaction().commit();
-       
+                     
+            for (Iterator iter = stores.iterator();iter.hasNext();) {
+                Store store = (Store)iter.next();
+             //   log.debug(store);
+                Hibernate.initialize(store.getOffers());}            
+                session.getTransaction().commit(); 
         } catch (Exception ex) {
             if (session != null) {
                 session.getTransaction().rollback();
@@ -105,5 +112,6 @@ public class StoreDao implements IStoreDao{
         }
         return stores;
   
-}
+}///
+
 }

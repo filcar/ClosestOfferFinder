@@ -5,6 +5,7 @@
  */
 package gr.myoffers.ws.wsoffer.model;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,32 +23,38 @@ import javax.xml.bind.annotation.XmlType;
 @Entity
 @Table(name="CATEGORY")
 @XmlRootElement(name = "category")
-@XmlType(propOrder={"id","catName"})
+@XmlType(propOrder={"categoryId","catName"})
 
-public class Category {   
+public class Category implements Serializable {   
+
+//    public Category(int categoryId, String catName) {
+//        this.categoryId = categoryId;
+//        this.catName = catName;
+//    }
+    
+    
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id")
     private int categoryId;
     @Column(name="cat_name")
     private String catName;
-    
+
     @XmlElement
-    public int getCatId(){
+    public int getCategoryId() {
         return categoryId;
     }
-    
-    public void setCatId(int categoryId){
+
+    public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
     }
-    
     @XmlElement
-    public String getCatName(){
+    public String getCatName() {
         return catName;
     }
-    
-    public void setCatName(String catName){
+
+    public void setCatName(String catName) {
         this.catName = catName;
     }
-
+    
 }
