@@ -7,6 +7,7 @@ package gr.myoffers.ws.wsoffer.dao;
 
 import gr.myoffers.ws.wsoffer.model.Company;
 import gr.myoffers.ws.wsoffer.util.HibernateUtil;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import org.hibernate.Hibernate;

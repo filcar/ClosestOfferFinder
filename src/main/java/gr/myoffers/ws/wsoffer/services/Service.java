@@ -224,18 +224,17 @@ public class Service {
         List<Response> responses;
         responses = new ArrayList<>();
         List<Company> companies = companyDao.getAllCompanies();
-        for (Iterator iter = companies.iterator();iter.hasNext();) {
-                Company company = (Company) iter.next();
-              //  Iterator  iter1= responses.iterator();
-        Response response = new Response();//= (Response) iter1;
-                response.setId(company.getId());
-                response.setStatus("Company");
-                response.setMessage(company.getName());
-                responses.add(response);
-              
-            }
-        
-    return responses;
+        for (Iterator iter = companies.iterator(); iter.hasNext();) {
+            Company company = (Company) iter.next();
+            Response response = new Response();
+            response.setId(company.getId());
+            response.setStatus("Company");
+            response.setMessage(company.getName());
+            responses.add(response);
+
+        }
+
+        return responses;
 //---------
 }
     @GET
@@ -257,7 +256,6 @@ public class Service {
         } else if (r <= 0) {
             throw new Exception("Incorrect radius");
         }
-        //stores = stores;
         stores=storeDao.getStoresByRadius(lat, lon, r);
         for (Iterator iter = stores.iterator();iter.hasNext();) {
                 Store store = (Store) iter.next();

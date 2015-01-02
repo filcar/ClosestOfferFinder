@@ -5,6 +5,7 @@
  */
 package gr.myoffers.ws.wsoffer.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -32,9 +33,9 @@ import javax.xml.bind.annotation.XmlType;
 @Entity
 @Table(name="OFFER")
 @XmlRootElement(name = "offer")
-@XmlType(propOrder={"offerId","offerName","descr","disc","price","category","startdate","enddate"})
+@XmlType(propOrder={"offerId","offerName","descr","disc","price","startdate","enddate","category"})
 
-public class Offer {
+public class Offer implements Serializable {
 
 //    public Offer(int offerId, String offerName, String descr, double disc, double price, Date enddate, Date startdate, Category category) {
 //        this.offerId = offerId;
